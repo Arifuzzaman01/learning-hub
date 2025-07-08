@@ -1,11 +1,30 @@
 import React from "react";
 import { Link, NavLink } from "react-router";
+import useAuth from "../hook/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-    const link = <>
-    <NavLink className='mx-2' to='/'>Home</NavLink>
-    <NavLink className='mx-2' to='/dashboard'>Dashboard</NavLink>
+  const { user, logOutUser } = useAuth();
+  console.log(user);
+  const handleLogOut = () => {
+    logOutUser()
+      .then((result) => {
+        toast.success("LogOut Successful");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const link = (
+    <>
+      <NavLink className="mx-2" to="/">
+        Home
+      </NavLink>
+      <NavLink className="mx-2" to="/dashboard">
+        Dashboard
+      </NavLink>
     </>
+  );
   return (
     <div className="navbar bg-base-100 shadow-sm sticky top-0">
       <div className="navbar-start">
@@ -31,18 +50,24 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-           {link}
+            {link}
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {link}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
       <div className="navbar-end">
-        <Link to='/login' className="btn btn-primary">LogIn</Link>
+        {user ? (
+          <Link onClick={handleLogOut} to="/login" className="btn btn-primary">
+            LogOut
+          </Link>
+        ) : (
+          <Link to="/login" className="btn btn-primary">
+            LogIn
+          </Link>
+        )}
       </div>
     </div>
   );

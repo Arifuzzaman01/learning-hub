@@ -1,15 +1,29 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
+import useAuth from "../hook/useAuth";
+import { saveUserInDB } from "../utils/utils";
+import toast from "react-hot-toast";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
-  const [eyeChange,setEyeChange] = useState(false)
+  const [eyeChange, setEyeChange] = useState(false);
+  const { singInUser } = useAuth();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    const user = { email, password };
+    singInUser(email, password)
+      .then(async (result) => {
+        console.log(result);
+        saveUserInDB(user);
+        toast.success("Login Successful");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="flex justify-center items-center h-screen">
@@ -30,15 +44,18 @@ const Login = () => {
             <label className="label">Password</label>
             <div className="relative">
               <input
-                type={eyeChange ? "text":"password"}
+                type={eyeChange ? "text" : "password"}
                 name="password"
                 className="input"
                 placeholder="Password"
                 required
               />
-              <div onClick={()=> setEyeChange(!eyeChange)} className="absolute top-2 right-6">
-                 {eyeChange ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
-             </div>
+              <div
+                onClick={() => setEyeChange(!eyeChange)}
+                className="absolute top-2 right-6"
+              >
+                {eyeChange ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
+              </div>
             </div>
             <div>
               <a className="link link-hover">Forgot password?</a>
@@ -46,13 +63,15 @@ const Login = () => {
             <button type="submit" className="btn btn-neutral mt-4">
               Login
             </button>
-            <p>
-              You have'nt an account? Please Create{" "}
-              <Link className="text-blue-600 underline" to="/register">
-                an account
-              </Link>
-            </p>
           </form>
+          <p className="text-center text-sm -my-2">Or</p>
+          <SocialLogin></SocialLogin>
+          <p>
+            You have'nt an account? Please Create{" "}
+            <Link className="text-blue-600 underline" to="/register">
+              an account
+            </Link>
+          </p>
         </div>
       </div>
     </div>

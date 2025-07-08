@@ -3,12 +3,14 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
 import { imageUpload } from "../common/ImageUpload";
 import useAuth from "../hook/useAuth";
+import useAxiosSecure from "../hook/useAxiosSecure";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
   const [eyeChange, setEyeChange] = useState(false);
   const { updateUser, signUpUser } = useAuth();
   // console.log(user);
-
+  const axiosSecure = useAxiosSecure();
   const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,16 +25,19 @@ const Register = () => {
     const userInfo = {
       name,
       email,
-      password,
+
       imageURL,
       role,
       createdAt: new Date().toISOString(),
-      lastCreatedAt: new Date().toISOString(),
+      lastLoggedAt: new Date().toISOString(),
     };
     console.log(userInfo);
     signUpUser(email, password)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result.user);
+        //add user in database
+        const { data } = await axiosSecure.post("/users", userInfo);
+        console.log(data);
         // Update user profile
         updateUser({
           displayName: name,
@@ -119,8 +124,6 @@ const Register = () => {
                 className="p-[10px] border mr-3 border-gray-300 rounded-sm w-full"
               >
                 <option value="student">Student</option>
-                <option value="tutor">Tutor</option>
-                <option value="admin">Admin</option>
               </select>
             </div>
             <div className="flex mt-4">
@@ -130,12 +133,9 @@ const Register = () => {
               >
                 Login
               </button>
-              <button
-                type="button"
-                className="btn btn-primary flex-1 rounded-tl-full"
-              >
-                Social Login
-              </button>
+              <div className="flex-1 rounded-tl-full w-full">
+                <SocialLogin reg={"reg"} />
+              </div>
             </div>
           </form>
 
