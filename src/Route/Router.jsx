@@ -4,7 +4,8 @@ import MainLayout from "../Layout/MainLayout";
 import Login from "../authentication/Login";
 import Register from "../authentication/Register";
 import DashboardLayout from "../Dashboard/DashboardLayout";
-import CreateStudy from "../Dashboard/Tutor/CreateStudy";
+import CreateStudySession from "../Dashboard/Tutor/CreateStudySession ";
+import AllStudySession from "../Pages/AllStudySession";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: App,
+      },
+      {
+        path: '/all-study-session',
+        Component: AllStudySession
       },
       {
         path: "/login",
@@ -31,7 +36,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "createStudy",
-        element: <CreateStudy />,
+        element: <CreateStudySession />,
       },
     ],
   },

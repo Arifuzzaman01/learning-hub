@@ -1,4 +1,5 @@
 import React from "react";
+import { FaHome } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router';
 
 const DashboardLayout = () => {
@@ -44,6 +45,16 @@ const DashboardLayout = () => {
         <aside className="w-80 min-h-full bg-base-200 p-4">
           <h2 className="text-2xl font-bold mb-6 text-center">📚 Study Panel</h2>
           <ul className="menu space-y-2">
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-primary" : undefined
+                }
+              >
+                <FaHome size={20} /> Home
+              </NavLink>
+            </li>
             <li>
               <NavLink
                 to="createStudy"
