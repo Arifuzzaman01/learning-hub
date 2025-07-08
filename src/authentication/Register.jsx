@@ -1,31 +1,57 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router";
+import { imageUpload } from "../common/ImageUpload";
+import useAuth from "../hook/useAuth";
 
 const Register = () => {
   const [eyeChange, setEyeChange] = useState(false);
-  const handleRegister = (e) => {
+  const { updateUser, signUpUser } = useAuth();
+  // console.log(user);
+
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photo = form.photo.files[0];
+    const photoUrl = form?.photo?.files[0];
     const email = form.email.value;
     const password = form.password.value;
     const role = form.role.value;
+    const imageURL = await imageUpload(photoUrl);
+    console.log(imageURL);
+
     const userInfo = {
       name,
-      photo,
       email,
       password,
+      imageURL,
       role,
+      createdAt: new Date().toISOString(),
+      lastCreatedAt: new Date().toISOString(),
     };
     console.log(userInfo);
+    signUpUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+        // Update user profile
+        updateUser({
+          displayName: name,
+          photoURL: imageURL,
+        }).then(() => {
+          alert("registerSucceed");
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
   return (
     <div className="flex justify-center items-center h-[calc(100vh-64px)]">
       <div className="card bg-base-100 w-full max-w-3/5 shrink-0 shadow-2xl ">
         <div className="card-body">
           <h1 className="text-3xl font-bold">Please Register here</h1>
+          {/* <img src={imgLink} alt="imgbb" /> */}
           <form
             onSubmit={handleRegister}
             className="fieldset md:grid grid-cols-2 gap-5"
@@ -60,6 +86,7 @@ const Register = () => {
               <input
                 type="file"
                 name="photo"
+                accept="image/*"
                 className="input cursor-pointer"
                 required
               />
