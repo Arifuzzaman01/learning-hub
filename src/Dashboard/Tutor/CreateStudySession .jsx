@@ -11,15 +11,17 @@ const CreateStudySession = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = async (data) => {
     console.log("Form Data:", data);
-    // TODO: send to backend
+    // done: send to backend
     const result = await axiosSecure.post("/session", data);
     console.log(result?.data);
     if (result?.data?.insertedId) {
-      toast.success("Created study session")
+      toast.success("Created study session");
+      reset();
     }
   };
 

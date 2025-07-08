@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import { FaHome } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router';
 
@@ -97,6 +98,7 @@ const DashboardLayout = () => {
             </li>
           </ul>
         </aside>
+        <Toaster position="top-right" reverseOrder={false} />
       </div>
     </div>
   );

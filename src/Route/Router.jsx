@@ -6,6 +6,7 @@ import Register from "../authentication/Register";
 import DashboardLayout from "../Dashboard/DashboardLayout";
 import CreateStudySession from "../Dashboard/Tutor/CreateStudySession ";
 import AllStudySession from "../Pages/AllStudySession";
+import SessionDetails from "../Pages/SessionDetails ";
 
 export const router = createBrowserRouter([
   {
@@ -17,8 +18,12 @@ export const router = createBrowserRouter([
         Component: App,
       },
       {
-        path: '/all-study-session',
-        Component: AllStudySession
+        path: "/all-study-session",
+        Component: AllStudySession,
+      },
+      {
+        path: "/session/:id",
+        Component: SessionDetails,
       },
       {
         path: "/login",
