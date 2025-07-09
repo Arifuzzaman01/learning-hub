@@ -110,7 +110,7 @@ const DashboardLayout = () => {
 
             <li>
               <NavLink
-                to="view-materials"
+                to="/dashboard/view-materials"
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-primary" : undefined
                 }

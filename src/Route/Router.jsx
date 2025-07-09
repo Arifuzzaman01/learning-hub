@@ -13,6 +13,7 @@ import CreateNote from "../Dashboard/Student/CreateNote ";
 import ManageNotes from "../Dashboard/Student/ManageNotes ";
 import MyStudySessions from "../Dashboard/Tutor/MyStudySessions ";
 import UploadMaterials from "../Dashboard/Tutor/UploadMaterials ";
+import ViewMaterials from "../Dashboard/Tutor/ViewMaterials";
 
 export const router = createBrowserRouter([
   {
@@ -51,7 +52,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "upload-materials",
-        element: <UploadMaterials />
+        element: <UploadMaterials />,
+      },
+      {
+        path: "view-materials",
+        element: <ViewMaterials />,
       },
       // student
       {
