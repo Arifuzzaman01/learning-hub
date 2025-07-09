@@ -1,6 +1,7 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
 import {
+  FaBookOpen,
   FaBookReader,
   FaClipboardList,
   FaHome,
@@ -168,6 +169,19 @@ const DashboardLayout = () => {
               >
                 <FaClipboardList />
                 Manage Personal Notes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/view-student-materials"
+                className={({ isActive }) =>
+                  isActive
+                    ? "active font-bold text-primary flex items-center gap-2"
+                    : "flex items-center gap-2"
+                }
+              >
+                <FaBookOpen />
+                View Study Materials
               </NavLink>
             </li>
           </ul>

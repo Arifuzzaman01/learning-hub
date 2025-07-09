@@ -14,6 +14,7 @@ import ManageNotes from "../Dashboard/Student/ManageNotes ";
 import MyStudySessions from "../Dashboard/Tutor/MyStudySessions ";
 import UploadMaterials from "../Dashboard/Tutor/UploadMaterials ";
 import ViewMaterials from "../Dashboard/Tutor/ViewMaterials";
+import StudentMaterials from "../Dashboard/Student/StudentMaterials";
 
 export const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ export const router = createBrowserRouter([
       {
         path: "my-study-sessions",
         element: <MyStudySessions />,
+      },
+      {
+        path: "view-student-materials",
+        element: <StudentMaterials />,
       },
     ],
   },

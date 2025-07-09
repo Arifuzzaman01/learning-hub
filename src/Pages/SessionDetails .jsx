@@ -40,6 +40,7 @@ const SessionDetails = () => {
     const bookingInfo = {
       studentEmail: user.email,
       sessionId: session._id,
+      sessionTitle: session.title,
       tutorEmail: session.tutorEmail,
     };
 

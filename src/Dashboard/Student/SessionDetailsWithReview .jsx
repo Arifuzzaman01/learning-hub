@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { data, Link, useParams } from "react-router";
 import { useForm } from "react-hook-form";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { IoArrowBack } from "react-icons/io5";
@@ -41,13 +41,14 @@ const SessionDetailsWithReview = () => {
   const onSubmit = (data) => {
     const reviewData = {
       sessionId: id,
+      sessionTitle: title,
       studentEmail: user.email,
       rating: parseFloat(data.rating),
       comment: data.comment,
     };
     reviewMutation.mutate(reviewData);
   };
-
+console.log(data);
   return (
     <div className="max-w-3xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-2">{session?.title}</h1>
