@@ -11,6 +11,8 @@ import BookedSessions from "../Dashboard/Student/BookedSessions ";
 import SessionDetailsWithReview from "../Dashboard/Student/SessionDetailsWithReview ";
 import CreateNote from "../Dashboard/Student/CreateNote ";
 import ManageNotes from "../Dashboard/Student/ManageNotes ";
+import MyStudySessions from "../Dashboard/Tutor/MyStudySessions ";
+import UploadMaterials from "../Dashboard/Tutor/UploadMaterials ";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +49,10 @@ export const router = createBrowserRouter([
         path: "createStudy",
         element: <CreateStudySession />,
       },
+      {
+        path: "upload-materials",
+        element: <UploadMaterials />
+      },
       // student
       {
         path: "booked-sessions",
@@ -63,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "personal-notes",
         element: <ManageNotes />,
+      },
+      {
+        path: "my-study-sessions",
+        element: <MyStudySessions />,
       },
     ],
   },

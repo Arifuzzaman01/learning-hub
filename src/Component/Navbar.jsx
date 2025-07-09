@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
+  console.log(user);
   // console.log(user);
   const handleLogOut = () => {
     logOutUser()
@@ -62,6 +63,15 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
       <div className="navbar-end">
+        <div className="mr-2" >
+          {user && (
+            <img
+              className="w-12 h-12 p-1 rounded-full"
+              src={user?.photoURL}
+              alt="profile"
+            />
+          )}
+        </div>
         {user ? (
           <Link onClick={handleLogOut} to="/login" className="btn btn-primary">
             LogOut

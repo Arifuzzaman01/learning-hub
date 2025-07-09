@@ -92,7 +92,7 @@ const Register = () => {
                 type="file"
                 name="photo"
                 accept="image/*"
-                className="input cursor-pointer"
+                className="input cursor-pointer file-input file-input-bordered"
                 required
               />
             </div>

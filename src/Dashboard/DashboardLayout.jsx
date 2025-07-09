@@ -88,7 +88,7 @@ const DashboardLayout = () => {
 
             <li>
               <NavLink
-                to="my-study-sessions"
+                to="/dashboard/my-study-sessions"
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-primary" : undefined
                 }
@@ -99,7 +99,7 @@ const DashboardLayout = () => {
 
             <li>
               <NavLink
-                to="upload-materials"
+                to="/dashboard/upload-materials"
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-primary" : undefined
                 }
