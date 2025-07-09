@@ -1,7 +1,12 @@
 import React from "react";
 import { Toaster } from "react-hot-toast";
-import { FaHome } from "react-icons/fa";
-import { NavLink, Outlet } from 'react-router';
+import {
+  FaBookReader,
+  FaClipboardList,
+  FaHome,
+  FaRegStickyNote,
+} from "react-icons/fa";
+import { NavLink, Outlet } from "react-router";
 
 const DashboardLayout = () => {
   return (
@@ -44,7 +49,9 @@ const DashboardLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <aside className="w-80 min-h-full bg-base-200 p-4">
-          <h2 className="text-2xl font-bold mb-6 text-center">📚 Study Panel</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center">
+            📚 Study Panel
+          </h2>
           <ul className="menu space-y-2">
             <li>
               <NavLink
@@ -56,26 +63,7 @@ const DashboardLayout = () => {
                 <FaHome size={20} /> Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="createStudy"
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-primary" : undefined
-                }
-              >
-                ➕ Create Study Session
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="mySessions"
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-primary" : undefined
-                }
-              >
-                📅 My Sessions
-              </NavLink>
-            </li>
+            {/* Admin */}
             <li>
               <NavLink
                 to="allUsers"
@@ -86,7 +74,51 @@ const DashboardLayout = () => {
                 👥 All Users
               </NavLink>
             </li>
+            {/* TUTOR */}
             <li>
+              <NavLink
+                to="createStudy"
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-primary" : undefined
+                }
+              >
+                ➕ Create Study Session
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="my-study-sessions"
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-primary" : undefined
+                }
+              >
+                📋 My All Study Sessions
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="upload-materials"
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-primary" : undefined
+                }
+              >
+                📁 Upload Materials
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="view-materials"
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-primary" : undefined
+                }
+              >
+                📚 View All Materials
+              </NavLink>
+            </li>
+            {/* <li>
               <NavLink
                 to="reviews"
                 className={({ isActive }) =>
@@ -94,6 +126,48 @@ const DashboardLayout = () => {
                 }
               >
                 ⭐ Reviews
+              </NavLink>
+            </li> */}
+            {/* student */}
+            <li>
+              <NavLink
+                to="/dashboard/booked-sessions"
+                className={({ isActive }) =>
+                  isActive
+                    ? "active font-bold text-primary flex items-center gap-2"
+                    : "flex items-center gap-2"
+                }
+              >
+                <FaBookReader />
+                View Booked Sessions
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/dashboard/create-note"
+                className={({ isActive }) =>
+                  isActive
+                    ? "active font-bold text-primary flex items-center gap-2"
+                    : "flex items-center gap-2"
+                }
+              >
+                <FaRegStickyNote />
+                Create Note
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/dashboard/personal-notes"
+                className={({ isActive }) =>
+                  isActive
+                    ? "active font-bold text-primary flex items-center gap-2"
+                    : "flex items-center gap-2"
+                }
+              >
+                <FaClipboardList />
+                Manage Personal Notes
               </NavLink>
             </li>
           </ul>

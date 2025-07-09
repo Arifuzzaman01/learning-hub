@@ -7,6 +7,10 @@ import DashboardLayout from "../Dashboard/DashboardLayout";
 import CreateStudySession from "../Dashboard/Tutor/CreateStudySession ";
 import AllStudySession from "../Pages/AllStudySession";
 import SessionDetails from "../Pages/SessionDetails ";
+import BookedSessions from "../Dashboard/Student/BookedSessions ";
+import SessionDetailsWithReview from "../Dashboard/Student/SessionDetailsWithReview ";
+import CreateNote from "../Dashboard/Student/CreateNote ";
+import ManageNotes from "../Dashboard/Student/ManageNotes ";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +46,23 @@ export const router = createBrowserRouter([
       {
         path: "createStudy",
         element: <CreateStudySession />,
+      },
+      // student
+      {
+        path: "booked-sessions",
+        element: <BookedSessions></BookedSessions>,
+      },
+      {
+        path: "booked-sessions/:id",
+        element: <SessionDetailsWithReview />,
+      },
+      {
+        path: "create-note",
+        element: <CreateNote />,
+      },
+      {
+        path: "personal-notes",
+        element: <ManageNotes />,
       },
     ],
   },
