@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../hook/useAuth";
 import { saveUserInDB } from "../utils/utils";
 import toast from "react-hot-toast";
@@ -9,6 +9,10 @@ import SocialLogin from "./SocialLogin";
 const Login = () => {
   const [eyeChange, setEyeChange] = useState(false);
   const { singInUser } = useAuth();
+  const location = useLocation();
+  const from = location?.state?.from || "/";
+  console.log(from);
+  const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,6 +24,7 @@ const Login = () => {
         console.log(result);
         saveUserInDB(user);
         toast.success("Login Successful");
+        navigate(from, {replace: true});
       })
       .catch((err) => {
         console.log(err);

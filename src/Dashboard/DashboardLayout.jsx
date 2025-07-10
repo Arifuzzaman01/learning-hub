@@ -10,8 +10,11 @@ import {
   FaRegStickyNote,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router";
+import useRole from "../hook/useRole";
 
 const DashboardLayout = () => {
+  const { role, isLoading } = useRole();
+  if (isLoading) return <p>Loading...</p>;
   return (
     <div className="drawer lg:drawer-open bg-base-100 min-h-screen">
       {/* Sidebar toggle input for mobile */}
@@ -67,87 +70,95 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
             {/* Admin */}
-            <li>
-              <NavLink
-                to="/dashboard/allUsers"
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-primary" : undefined
-                }
-              >
-                👥 All Users
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/all-study-sessions"
-                className={({ isActive }) =>
-                  isActive
-                    ? "active font-bold text-primary flex items-center gap-2"
-                    : "flex items-center gap-2"
-                }
-              >
-                <FaChalkboardTeacher />
-                All Study Sessions
-              </NavLink>
-            </li>
+            {role === "admin" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/allUsers"
+                    className={({ isActive }) =>
+                      isActive ? "active font-bold text-primary" : undefined
+                    }
+                  >
+                    👥 All Users
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/all-study-sessions"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "active font-bold text-primary flex items-center gap-2"
+                        : "flex items-center gap-2"
+                    }
+                  >
+                    <FaChalkboardTeacher />
+                    All Study Sessions
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/all-materials"
-                className={({ isActive }) =>
-                  isActive
-                    ? "active font-bold text-primary flex items-center gap-2"
-                    : "flex items-center gap-2"
-                }
-              >
-                <FaFolderOpen />
-                All Materials
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/all-materials"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "active font-bold text-primary flex items-center gap-2"
+                        : "flex items-center gap-2"
+                    }
+                  >
+                    <FaFolderOpen />
+                    All Materials
+                  </NavLink>
+                </li>
+              </>
+            )}
             {/* TUTOR */}
-            <li>
-              <NavLink
-                to="createStudy"
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-primary" : undefined
-                }
-              >
-                ➕ Create Study Session
-              </NavLink>
-            </li>
+            {role === "tutor" && (
+              <>
+                <li>
+                  <NavLink
+                    to="createStudy"
+                    className={({ isActive }) =>
+                      isActive ? "active font-bold text-primary" : undefined
+                    }
+                  >
+                    ➕ Create Study Session
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/my-study-sessions"
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-primary" : undefined
-                }
-              >
-                📋 My All Study Sessions
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/my-study-sessions"
+                    className={({ isActive }) =>
+                      isActive ? "active font-bold text-primary" : undefined
+                    }
+                  >
+                    📋 My All Study Sessions
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/upload-materials"
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-primary" : undefined
-                }
-              >
-                📁 Upload Materials
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/upload-materials"
+                    className={({ isActive }) =>
+                      isActive ? "active font-bold text-primary" : undefined
+                    }
+                  >
+                    📁 Upload Materials
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/view-materials"
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-primary" : undefined
-                }
-              >
-                📚 View All Materials
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/view-materials"
+                    className={({ isActive }) =>
+                      isActive ? "active font-bold text-primary" : undefined
+                    }
+                  >
+                    📚 View All Materials
+                  </NavLink>
+                </li>
+              </>
+            )}
             {/* <li>
               <NavLink
                 to="reviews"
@@ -159,60 +170,64 @@ const DashboardLayout = () => {
               </NavLink>
             </li> */}
             {/* student */}
-            <li>
-              <NavLink
-                to="/dashboard/booked-sessions"
-                className={({ isActive }) =>
-                  isActive
-                    ? "active font-bold text-primary flex items-center gap-2"
-                    : "flex items-center gap-2"
-                }
-              >
-                <FaBookReader />
-                View Booked Sessions
-              </NavLink>
-            </li>
+            {role === "student" && (
+              <>
+                <li>
+                  <NavLink
+                    to="/dashboard/booked-sessions"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "active font-bold text-primary flex items-center gap-2"
+                        : "flex items-center gap-2"
+                    }
+                  >
+                    <FaBookReader />
+                    View Booked Sessions
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/create-note"
-                className={({ isActive }) =>
-                  isActive
-                    ? "active font-bold text-primary flex items-center gap-2"
-                    : "flex items-center gap-2"
-                }
-              >
-                <FaRegStickyNote />
-                Create Note
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/create-note"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "active font-bold text-primary flex items-center gap-2"
+                        : "flex items-center gap-2"
+                    }
+                  >
+                    <FaRegStickyNote />
+                    Create Note
+                  </NavLink>
+                </li>
 
-            <li>
-              <NavLink
-                to="/dashboard/personal-notes"
-                className={({ isActive }) =>
-                  isActive
-                    ? "active font-bold text-primary flex items-center gap-2"
-                    : "flex items-center gap-2"
-                }
-              >
-                <FaClipboardList />
-                Manage Personal Notes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/dashboard/view-student-materials"
-                className={({ isActive }) =>
-                  isActive
-                    ? "active font-bold text-primary flex items-center gap-2"
-                    : "flex items-center gap-2"
-                }
-              >
-                <FaBookOpen />
-                View Study Materials
-              </NavLink>
-            </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/personal-notes"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "active font-bold text-primary flex items-center gap-2"
+                        : "flex items-center gap-2"
+                    }
+                  >
+                    <FaClipboardList />
+                    Manage Personal Notes
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/dashboard/view-student-materials"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "active font-bold text-primary flex items-center gap-2"
+                        : "flex items-center gap-2"
+                    }
+                  >
+                    <FaBookOpen />
+                    View Study Materials
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </aside>
         <Toaster position="top-right" reverseOrder={false} />

@@ -17,6 +17,8 @@ import ViewMaterials from "../Dashboard/Tutor/ViewMaterials";
 import StudentMaterials from "../Dashboard/Student/StudentMaterials";
 import AllUsers from "../Dashboard/Admin/AllUsers";
 import AdminStudySessions from "../Dashboard/Admin/AdminStudySessions";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -47,15 +49,27 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "allUsers",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-study-sessions",
-        element: <AdminStudySessions />,
+        element: (
+          <AdminRoute>
+            <AdminStudySessions />
+          </AdminRoute>
+        ),
       },
       // tutor
       {
