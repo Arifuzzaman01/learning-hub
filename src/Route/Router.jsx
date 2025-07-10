@@ -21,6 +21,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import TutorRoute from "./TutorRoute";
 import StudentRoute from "./StudentRoute";
+import Home from "../Pages/homePage/Home";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: App,
+        Component: Home,
       },
       {
         path: "/all-study-session",
