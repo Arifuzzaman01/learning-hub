@@ -19,6 +19,8 @@ import AllUsers from "../Dashboard/Admin/AllUsers";
 import AdminStudySessions from "../Dashboard/Admin/AdminStudySessions";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import TutorRoute from "./TutorRoute";
+import StudentRoute from "./StudentRoute";
 
 export const router = createBrowserRouter([
   {
@@ -74,40 +76,78 @@ export const router = createBrowserRouter([
       // tutor
       {
         path: "createStudy",
-        element: <CreateStudySession />,
+        element: (
+          <TutorRoute>
+            <CreateStudySession />
+          </TutorRoute>
+        ),
       },
       {
         path: "upload-materials",
-        element: <UploadMaterials />,
+        element: (
+          <TutorRoute>
+            {" "}
+            <UploadMaterials />
+          </TutorRoute>
+        ),
       },
       {
         path: "view-materials",
-        element: <ViewMaterials />,
+        element: (
+          <TutorRoute>
+            <ViewMaterials />
+          </TutorRoute>
+        ),
+      },
+      {
+        path: "my-study-sessions", //my-study-sessions
+        element: (
+          <TutorRoute>
+            <MyStudySessions />
+          </TutorRoute>
+        ),
       },
       // student
       {
         path: "booked-sessions",
-        element: <BookedSessions></BookedSessions>,
+        element: (
+          <StudentRoute>
+            <BookedSessions />
+          </StudentRoute>
+        ),
       },
       {
         path: "booked-sessions/:id",
-        element: <SessionDetailsWithReview />,
+        element: (
+          <StudentRoute>
+            <SessionDetailsWithReview />
+          </StudentRoute>
+        ),
       },
       {
         path: "create-note",
-        element: <CreateNote />,
+        element: (
+          <StudentRoute>
+            <CreateNote />
+          </StudentRoute>
+        ),
       },
       {
         path: "personal-notes",
-        element: <ManageNotes />,
+        element: (
+          <StudentRoute>
+            <ManageNotes />
+          </StudentRoute>
+        ),
       },
-      {
-        path: "my-study-sessions",
-        element: <MyStudySessions />,
-      },
+
       {
         path: "view-student-materials",
-        element: <StudentMaterials />,
+        element: (
+          <StudentRoute>
+            <StudentMaterials />
+          </StudentRoute>
+        ),
       },
     ],
   },
