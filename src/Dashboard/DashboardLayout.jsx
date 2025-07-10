@@ -98,7 +98,7 @@ const DashboardLayout = () => {
 
                 <li>
                   <NavLink
-                    to="/dashboard/all-materials"
+                    to="/dashboard/admin-all-materials"
                     className={({ isActive }) =>
                       isActive
                         ? "active font-bold text-primary flex items-center gap-2"

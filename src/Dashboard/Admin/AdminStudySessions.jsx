@@ -8,8 +8,12 @@ const AdminStudySessions = () => {
   const axiosSecure = useAxiosSecure();
   const [sessions, setSessions] = useState([]);
   const [approveModal, setApproveModal] = useState(null); // session data
+  const [isUpdate, setIsUpdate] = useState(null);
   const [feeType, setFeeType] = useState("free");
   const [amount, setAmount] = useState(0);
+  const [updateSession, setUpdateSession] = useState(null); // holds session object
+  const [updateFeeType, setUpdateFeeType] = useState("free");
+  const [updateAmount, setUpdateAmount] = useState(0);
 
   const fetchSessions = async () => {
     const { data } = await axiosSecure.get("/all-sessions");
@@ -67,6 +71,29 @@ const AdminStudySessions = () => {
       toast.error("Delete failed");
     }
   };
+  const handleUpdateSubmit = async () => {
+    try {
+      const res = await axiosSecure.patch(
+        `/session/update/${updateSession._id}`,
+        {
+          fee: updateFeeType === "paid" ? updateAmount : 0,
+        }
+      );
+
+      if (res.data.modifiedCount > 0) {
+        toast.success("Session updated successfully");
+        setUpdateSession(null);
+        fetchSessions();
+      }
+    } catch (err) {
+      toast.error("Failed to update session");
+    }
+  };
+  const handleUpdate = (session) => {
+    setUpdateSession(session);
+    setUpdateFeeType(session.fee > 0 ? "paid" : "free");
+    setUpdateAmount(session.fee || 0);
+  };
 
   return (
     <div className="max-w-6xl mx-auto p-4">
@@ -117,11 +144,12 @@ const AdminStudySessions = () => {
             {session.status === "approved" && (
               <div className="flex gap-2 mt-2">
                 <button
+                  onClick={() => handleUpdate(session)}
                   className="btn btn-sm btn-info flex-1"
-                  onClick={() => toast("Update form modal can be implemented")}
                 >
                   <FaEdit /> Update
                 </button>
+
                 <button
                   onClick={() => handleDelete(session._id)}
                   className="btn btn-sm btn-outline btn-error flex-1"
@@ -178,6 +206,55 @@ const AdminStudySessions = () => {
               </button>
               <button className="btn btn-primary" onClick={handleApprove}>
                 Approve Now
+              </button>
+            </div>
+          </Dialog.Panel>
+        </div>
+      </Dialog>
+      {/* update modal */}
+      <Dialog
+        open={!!updateSession}
+        onClose={() => setUpdateSession(null)}
+        className="relative z-50"
+      >
+        <div className="fixed inset-0 bg-black/40" aria-hidden="true" />
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <Dialog.Panel className="w-full max-w-md bg-white p-6 rounded-lg shadow space-y-4">
+            <Dialog.Title className="text-lg font-bold">
+              Update: {updateSession?.title}
+            </Dialog.Title>
+
+            <div>
+              <label className="label">Is this session Free or Paid?</label>
+              <select
+                value={updateFeeType}
+                onChange={(e) => setUpdateFeeType(e.target.value)}
+                className="select select-bordered w-full"
+              >
+                <option value="free">Free</option>
+                <option value="paid">Paid</option>
+              </select>
+            </div>
+
+            {updateFeeType === "paid" && (
+              <div>
+                <label className="label">Enter Registration Fee</label>
+                <input
+                  type="number"
+                  value={updateAmount}
+                  onChange={(e) => setUpdateAmount(e.target.value)}
+                  className="input input-bordered w-full"
+                  placeholder="Amount"
+                />
+              </div>
+            )}
+
+            <div className="flex justify-end gap-2">
+              <button className="btn" onClick={() => setUpdateSession(null)}>
+                Cancel
+              </button>
+              <button className="btn btn-primary" onClick={handleUpdateSubmit}>
+                Update Now
               </button>
             </div>
           </Dialog.Panel>
