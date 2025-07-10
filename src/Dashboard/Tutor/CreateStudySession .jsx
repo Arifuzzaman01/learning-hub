@@ -127,15 +127,21 @@ const CreateStudySession = () => {
         {/* Registration Fee (only editable by admin) */}
         <div>
           <label className="label">Registration Fee</label>
-          <input
-            {...register("fee")}
+          {/* <input
             type="number"
             defaultValue={0}
             readOnly={role !== "admin"}
             className={`input input-bordered w-full ${
               role !== "admin" ? "bg-gray-100" : ""
             }`}
-          />
+          /> */}
+          <select
+            {...register("fee")}
+            className="w-full select select-bordered"
+          >
+            <option defaultValue='free' value="free">Free</option>
+            <option value="paid">Paid</option>
+          </select>
         </div>
 
         {/* Status (default: pending) */}
