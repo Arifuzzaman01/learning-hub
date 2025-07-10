@@ -3,7 +3,9 @@ import { Toaster } from "react-hot-toast";
 import {
   FaBookOpen,
   FaBookReader,
+  FaChalkboardTeacher,
   FaClipboardList,
+  FaFolderOpen,
   FaHome,
   FaRegStickyNote,
 } from "react-icons/fa";
@@ -67,12 +69,39 @@ const DashboardLayout = () => {
             {/* Admin */}
             <li>
               <NavLink
-                to="allUsers"
+                to="/dashboard/allUsers"
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-primary" : undefined
                 }
               >
                 👥 All Users
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/dashboard/all-study-sessions"
+                className={({ isActive }) =>
+                  isActive
+                    ? "active font-bold text-primary flex items-center gap-2"
+                    : "flex items-center gap-2"
+                }
+              >
+                <FaChalkboardTeacher />
+                All Study Sessions
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink
+                to="/dashboard/all-materials"
+                className={({ isActive }) =>
+                  isActive
+                    ? "active font-bold text-primary flex items-center gap-2"
+                    : "flex items-center gap-2"
+                }
+              >
+                <FaFolderOpen />
+                All Materials
               </NavLink>
             </li>
             {/* TUTOR */}

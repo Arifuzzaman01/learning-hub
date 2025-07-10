@@ -15,6 +15,7 @@ import MyStudySessions from "../Dashboard/Tutor/MyStudySessions ";
 import UploadMaterials from "../Dashboard/Tutor/UploadMaterials ";
 import ViewMaterials from "../Dashboard/Tutor/ViewMaterials";
 import StudentMaterials from "../Dashboard/Student/StudentMaterials";
+import AllUsers from "../Dashboard/Admin/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
     children: [
+      {
+        path: "allUsers",
+        element: <AllUsers />,
+      },
       {
         path: "createStudy",
         element: <CreateStudySession />,
