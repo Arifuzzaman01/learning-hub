@@ -10,11 +10,13 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../fibrebase/firebase.init";
+import useAxiosSecure from "../hook/useAxiosSecure";
 
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
+  const axiosSecure = useAxiosSecure();
   const signUpUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -39,9 +41,17 @@ const AuthProvider = ({ children }) => {
   };
   // onAuth State change
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-      setLoading(false)
+      // jwt post
+      if (currentUser?.email) {
+        const userData = { email: currentUser?.email };
+        const { data } = await axiosSecure.post("/jwt", userData, {
+          withCredentials: true,
+        });
+        console.log(data);
+      }
+      setLoading(false);
     });
     return () => {
       return unSubscribe();

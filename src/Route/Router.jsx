@@ -23,6 +23,7 @@ import TutorRoute from "./TutorRoute";
 import StudentRoute from "./StudentRoute";
 import Home from "../Pages/homePage/Home";
 import AdminAllMaterials from "../Dashboard/Admin/AdminAllMaterials";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         Component: Login,
+      },
+      {
+        path: "/session-payment/:id",
+        Component: Payment,
       },
       {
         path: "/register",
@@ -74,9 +79,15 @@ export const router = createBrowserRouter([
             <AdminStudySessions />
           </AdminRoute>
         ),
-      }, {
-        path: 'admin-all-materials',
-        element: <AdminRoute> <AdminAllMaterials /></AdminRoute>
+      },
+      {
+        path: "admin-all-materials",
+        element: (
+          <AdminRoute>
+            {" "}
+            <AdminAllMaterials />
+          </AdminRoute>
+        ),
       },
       // tutor
       {

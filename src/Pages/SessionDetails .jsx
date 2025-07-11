@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { format } from "date-fns";
@@ -12,8 +12,9 @@ const SessionDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [isBooking, setIsBooking] = useState(false);
+  const navigate = useNavigate()
 
-   const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["session", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/session/${id}`);
@@ -22,8 +23,8 @@ const SessionDetails = () => {
   });
 
   const session = data?.session;
-  const reviews  = data?.reviews ;
-  const averageRating  = data?.averageRating ;
+  const reviews = data?.reviews;
+  const averageRating = data?.averageRating;
   const isClosed = session && new Date(session.regEnd) < new Date();
 
   // ✅ Check localStorage only when session._id is defined
@@ -36,27 +37,29 @@ const SessionDetails = () => {
     }
   }, [session]);
 
-  const handleBooking = async () => {
-    const bookingInfo = {
-      studentEmail: user.email,
-      sessionId: session._id,
-      sessionTitle: session.title,
-      tutorEmail: session.tutorEmail,
-    };
+  const handleBooking = async (id) => {
+    console.log(id);
+    // const bookingInfo = {
+    //   studentEmail: user.email,
+    //   sessionId: session._id,
+    //   sessionTitle: session.title,
+    //   tutorEmail: session.tutorEmail,
+    // };
 
-    try {
-      const res = await axiosSecure.post("/bookings", bookingInfo);
-      if (res?.data?.insertedId) {
-        toast.success("🎉 Session booked successfully!");
-        localStorage.setItem(`booked-${session._id}`, "true");
-          setIsBooking(true);
-        //   TODO: Navigate payment pages
-      } else {
-        toast.error("Booking failed.");
-      }
-    } catch (err) {
-      toast.error("Something went wrong.");
-    }
+    // try {
+    //   const res = await axiosSecure.post("/bookings", bookingInfo);
+    //   if (res?.data?.insertedId) {
+    //     toast.success("🎉 Session booked successfully!");
+    //     localStorage.setItem(`booked-${session._id}`, "true");
+    //     setIsBooking(true);
+    //     //   TODO: Navigate payment pages
+    //   } else {
+    //     toast.error("Booking failed.");
+    //   }
+    // } catch (err) {
+    //   toast.error("Something went wrong.");
+    // }
+    navigate(`/session-payment/${id}`)
   };
 
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
@@ -107,7 +110,7 @@ const SessionDetails = () => {
         ) : (
           <button
             disabled={isBooking || isClosed}
-            onClick={handleBooking}
+            onClick={()=>handleBooking(session._id)}
             className="btn btn-primary w-full"
           >
             📥 Book Now
