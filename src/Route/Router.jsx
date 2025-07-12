@@ -24,6 +24,7 @@ import StudentRoute from "./StudentRoute";
 import Home from "../Pages/homePage/Home";
 import AdminAllMaterials from "../Dashboard/Admin/AdminAllMaterials";
 import Payment from "../Pages/Payment/Payment";
+import DashboardHome from "../Dashboard/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        index: true,
+        Component: DashboardHome,
+      },
       {
         path: "allUsers",
         element: (

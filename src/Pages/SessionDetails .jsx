@@ -40,32 +40,42 @@ const SessionDetails = () => {
   console.log(user);
   const handleBooking = async (id) => {
     console.log(id);
-    if (session?.fee !== 0 && user && role !== "admin" && role !== "tutor") {
+    if (
+      session?.fee !== 0 &&
+      user &&
+      role !== "admin" &&
+      role !== "tutor" &&
+      session?.status === "approved"
+    ) {
       navigate(`/session-payment/${id}`);
       return;
-    } else if (session?.fee == 0 && role !== "admin" && role !== "tutor") {
-      // const bookingInfo = {
-      //   studentEmail: user.email,
-      //   sessionId: session._id,
-      //   sessionTitle: session.title,
-      //   tutorEmail: session.tutorEmail,
-      // };
-      // try {
-      //   const res = await axiosSecure.post("/bookings", bookingInfo);
-      //   if (res?.data?.insertedId) {
-      //     toast.success("🎉 Session booked successfully!");
-      //     localStorage.setItem(`booked-${session._id}`, "true");
-      //     setIsBooking(true);
-      //     //   TODO: Navigate payment pages
-      //   } else {
-      //     toast.error("Booking failed.");
-      //   }
-      // } catch (err) {
-      //   toast.error("Something went wrong.");
-      // }
-    }
-    else {
-      return toast.error("Only student can access")
+    } else if (
+      session?.fee == 0 &&
+      role !== "admin" &&
+      role !== "tutor" &&
+      session?.status === "approved"
+    ) {
+      const bookingInfo = {
+        studentEmail: user.email,
+        sessionId: session._id,
+        sessionTitle: session.title,
+        tutorEmail: session.tutorEmail,
+      };
+      try {
+        const res = await axiosSecure.post("/bookings", bookingInfo);
+        if (res?.data?.insertedId) {
+          toast.success("🎉 Session booked successfully!");
+          localStorage.setItem(`booked-${session._id}`, "true");
+          setIsBooking(true);
+          //   TODO: Navigate payment pages
+        } else {
+          toast.error("Booking failed.");
+        }
+      } catch (err) {
+        toast.error("Something went wrong.");
+      }
+    } else {
+      return toast.error("Only student can access");
     }
     // const bookingInfo = {
     //   studentEmail: user.email,

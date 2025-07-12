@@ -69,6 +69,7 @@ const Navbar = () => {
               className="w-12 h-12 p-1 rounded-full"
               src={user?.photoURL}
               alt="profile"
+              title={user?.email}
             />
           )}
         </div>

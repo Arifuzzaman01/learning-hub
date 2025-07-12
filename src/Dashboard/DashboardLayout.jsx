@@ -9,7 +9,8 @@ import {
   FaHome,
   FaRegStickyNote,
 } from "react-icons/fa";
-import { NavLink, Outlet } from "react-router";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hook/useRole";
 
 const DashboardLayout = () => {
@@ -60,8 +61,13 @@ const DashboardLayout = () => {
           </h2>
           <ul className="menu space-y-2">
             <li>
+              <Link to="/" className="text-xl font-bold">
+                <IoMdArrowRoundBack size={24} /> Go Back
+              </Link>
+            </li>
+            <li>
               <NavLink
-                to="/"
+                to="/dashboard"
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-primary" : undefined
                 }
