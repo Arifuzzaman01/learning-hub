@@ -6,14 +6,15 @@ import { format } from "date-fns";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import useAuth from "../hook/useAuth";
+import useRole from "./../hook/useRole";
 
 const SessionDetails = () => {
   const { user } = useAuth();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [isBooking, setIsBooking] = useState(false);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  const { role } = useRole();
   const { data, isLoading } = useQuery({
     queryKey: ["session", id],
     queryFn: async () => {
@@ -36,9 +37,36 @@ const SessionDetails = () => {
       }
     }
   }, [session]);
-
+  console.log(user);
   const handleBooking = async (id) => {
     console.log(id);
+    if (session?.fee !== 0 && user && role !== "admin" && role !== "tutor") {
+      navigate(`/session-payment/${id}`);
+      return;
+    } else if (session?.fee == 0 && role !== "admin" && role !== "tutor") {
+      // const bookingInfo = {
+      //   studentEmail: user.email,
+      //   sessionId: session._id,
+      //   sessionTitle: session.title,
+      //   tutorEmail: session.tutorEmail,
+      // };
+      // try {
+      //   const res = await axiosSecure.post("/bookings", bookingInfo);
+      //   if (res?.data?.insertedId) {
+      //     toast.success("🎉 Session booked successfully!");
+      //     localStorage.setItem(`booked-${session._id}`, "true");
+      //     setIsBooking(true);
+      //     //   TODO: Navigate payment pages
+      //   } else {
+      //     toast.error("Booking failed.");
+      //   }
+      // } catch (err) {
+      //   toast.error("Something went wrong.");
+      // }
+    }
+    else {
+      return toast.error("Only student can access")
+    }
     // const bookingInfo = {
     //   studentEmail: user.email,
     //   sessionId: session._id,
@@ -59,7 +87,6 @@ const SessionDetails = () => {
     // } catch (err) {
     //   toast.error("Something went wrong.");
     // }
-    navigate(`/session-payment/${id}`)
   };
 
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
@@ -110,7 +137,7 @@ const SessionDetails = () => {
         ) : (
           <button
             disabled={isBooking || isClosed}
-            onClick={()=>handleBooking(session._id)}
+            onClick={() => handleBooking(session._id)}
             className="btn btn-primary w-full"
           >
             📥 Book Now

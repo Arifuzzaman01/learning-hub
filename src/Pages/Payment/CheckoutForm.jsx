@@ -2,8 +2,9 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 
-
-import './common.css';
+import "./common.css";
+import toast from "react-hot-toast";
+import useAuth from "../../hook/useAuth";
 
 const CheckoutForm = ({ session }) => {
   const stripe = useStripe();
@@ -11,15 +12,14 @@ const CheckoutForm = ({ session }) => {
   const axiosSecure = useAxiosSecure();
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-// console.log(session);
+  const {user}= useAuth()
+  // console.log(session);
   // Create payment intent on mount
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent",{fee:100})
-      .then((res) => {
-        setClientSecret(res.data.clientSecret);
-      });
-  }, [ axiosSecure]);
+    axiosSecure.post("/create-payment-intent", { fee: 100 }).then((res) => {
+      setClientSecret(res.data.clientSecret);
+    });
+  }, [axiosSecure]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,23 +55,49 @@ const CheckoutForm = ({ session }) => {
     } else {
       if (paymentIntent.status === "succeeded") {
         // ✅ Save payment info in your DB here
-        console.log("💰 Payment Successful!");
+        toast.success("💰 Payment Successful!");
+        // book now
+        const bookingInfo = {
+          studentEmail: user.email,
+          sessionId: session._id,
+          sessionTitle: session.title,
+          tutorEmail: session.tutorEmail,
+        };
+
+        try {
+          const res = await axiosSecure.post("/bookings", bookingInfo);
+          if (res?.data?.insertedId) {
+            toast.success("🎉 Session booked successfully!");
+            localStorage.setItem(`booked-${session._id}`, "true");
+            // setIsBooking(true);
+            //   TODO: Navigate payment pages
+          } else {
+            toast.error("Booking failed.");
+          }
+        } catch (err) {
+          toast.error("Something went wrong.");
+        }
       }
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <CardElement />
-      <button
-        className="btn btn-primary mt-4"
-        type="submit"
-        disabled={!stripe || !clientSecret}
+    <div className="  w-5/6 sm:w-3/4 md:w-2/5 mx-auto min-h-[40vh] md:min-h-[60vh] mt-5 sm:mt-10  md:mt-20">
+      <form
+        onSubmit={handleSubmit}
+        className="border-2 rounded-md border-gray-400"
       >
-        Pay Now
-      </button>
-      {error && <p className="text-red-500">{error}</p>}
-    </form>
+        <CardElement />
+        <button
+          className="btn btn-primary mt-4 w-full"
+          type="submit"
+          disabled={!stripe || !clientSecret}
+        >
+          $ {session?.fee} Pay Now
+        </button>
+        {error && <p className="text-red-500">{error}</p>}
+      </form>
+    </div>
   );
 };
 
