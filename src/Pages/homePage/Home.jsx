@@ -1,15 +1,16 @@
 import React from 'react';
 import Banner from './Banner';
 import AllTutors from './AllTutors';
-import AllStudySessions from '../AllStudySession';
+
 import Service from './Service';
+import StudySession from './StudySession';
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
             <AllTutors />
-            <AllStudySessions />
+            <StudySession />
             <Service />
         </div>
     );

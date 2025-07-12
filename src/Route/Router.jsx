@@ -26,6 +26,8 @@ import AdminAllMaterials from "../Dashboard/Admin/AdminAllMaterials";
 import Payment from "../Pages/Payment/Payment";
 import DashboardHome from "../Dashboard/DashboardHome";
 
+import AllTutorPage from "../Pages/AllTutorPage";
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -59,6 +61,10 @@ export const router = createBrowserRouter([
         path: "/register",
         Component: Register,
       },
+      {
+        path: '/all-tutor-page',
+        Component: AllTutorPage
+      }
     ],
   },
   {

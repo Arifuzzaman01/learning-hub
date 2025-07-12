@@ -24,6 +24,9 @@ const Navbar = () => {
       <NavLink className="mx-2" to="/all-study-session">
         All Study Session
       </NavLink>
+      <NavLink className="mx-2" to="/all-tutor-page">
+        All Tutor
+      </NavLink>
       <NavLink className="mx-2" to="/dashboard">
         Dashboard
       </NavLink>
