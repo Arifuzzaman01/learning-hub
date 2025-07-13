@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const HomeFeatureSection = () => {
   return (
-    <section className="w-11/12 mx-auto py-10">
+    <section className="w-11/12 mx-auto pb-12 pt-6">
       <h2 className="text-4xl font-bold text-blue-600 text-center mb-8">
         🚀 Platform Features
       </h2>
@@ -28,7 +28,7 @@ const HomeFeatureSection = () => {
         {/* Right Feature List with animation */}
         <motion.div
           className="w-full md:w-1/2 space-y-6 text-base"
-          initial={{ opacity: 0, x: 100 }}
+          initial={{ opacity: 0 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 3 , ease: "easeOut" }}
           viewport={{ once: true }}

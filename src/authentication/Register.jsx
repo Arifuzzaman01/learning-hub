@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { imageUpload } from "../common/ImageUpload";
 import useAuth from "../hook/useAuth";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import SocialLogin from "./SocialLogin";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const [eyeChange, setEyeChange] = useState(false);
   const { updateUser, signUpUser } = useAuth();
   // console.log(user);
+  const navigate = useNavigate()
   const axiosSecure = useAxiosSecure();
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -43,7 +45,8 @@ const Register = () => {
           displayName: name,
           photoURL: imageURL,
         }).then(() => {
-          alert("registerSucceed");
+          toast.success("Register Successful")
+          navigate("/")
         });
       })
       .catch((error) => {

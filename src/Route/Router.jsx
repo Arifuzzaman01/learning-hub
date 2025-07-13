@@ -27,6 +27,7 @@ import Payment from "../Pages/Payment/Payment";
 import DashboardHome from "../Dashboard/DashboardHome";
 
 import AllTutorPage from "../Pages/AllTutorPage";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -62,9 +63,9 @@ export const router = createBrowserRouter([
         Component: Register,
       },
       {
-        path: '/all-tutor-page',
-        Component: AllTutorPage
-      }
+        path: "/all-tutor-page",
+        Component: AllTutorPage,
+      },
     ],
   },
   {
@@ -181,5 +182,9 @@ export const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "*",
+    Component: ErrorPage,
   },
 ]);

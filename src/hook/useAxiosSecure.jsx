@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import toast from "react-hot-toast";
 const axiosSecure = axios.create({
-  baseURL: `http://localhost:3000`,
+  baseURL: `https://learn-hub-five-tau.vercel.app`,
   withCredentials: true,
 });
 
