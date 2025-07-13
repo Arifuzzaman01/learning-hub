@@ -2,6 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router";
 import useAuth from "../hook/useAuth";
 import toast from "react-hot-toast";
+import logo from "../assets/hub-logo.png"
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
@@ -18,16 +19,16 @@ const Navbar = () => {
   };
   const link = (
     <>
-      <NavLink className="mx-2" to="/">
+      <NavLink className="mx-2 hover:text-blue-600 font-bold" to="/">
         Home
       </NavLink>
-      <NavLink className="mx-2" to="/all-study-session">
+      <NavLink className="mx-2 hover:text-blue-600 font-bold" to="/all-study-session">
         All Study Session
       </NavLink>
-      <NavLink className="mx-2" to="/all-tutor-page">
+      <NavLink className="mx-2 hover:text-blue-600 font-bold" to="/all-tutor-page">
         All Tutor
       </NavLink>
-      <NavLink className="mx-2" to="/dashboard">
+      <NavLink className="mx-2 hover:text-blue-600 font-bold" to="/dashboard">
         Dashboard
       </NavLink>
     </>
@@ -60,7 +61,7 @@ const Navbar = () => {
             {link}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-2xl flex items-center"><span className="font-bold text-blue-700">Learn</span> <img className="w-10 h-5 mt-1" src={logo} alt="" /></a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{link}</ul>

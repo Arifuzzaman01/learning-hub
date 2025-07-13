@@ -43,7 +43,7 @@ const AllTutors = () => {
 
             <div className="mt-4 space-y-1">
               <p>
-                <strong>📚 Total Sessions:</strong> {tutor.sessionsCount || 0}
+                <strong>📚 Total Sessions:</strong> {tutor.totalSessions || 0}
               </p>
               <p className="flex items-center gap-2">
                 <strong>⭐ Avg. Rating:</strong>{" "}
@@ -57,7 +57,7 @@ const AllTutors = () => {
                 )}
               </p>
               <p>
-                <strong>📝 Total Reviews:</strong> {tutor.reviewCount || 0}
+                <strong>📝 Total Reviews:</strong> {tutor.totalReviews || 0}
               </p>
             </div>
             {/* TODO */}

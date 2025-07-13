@@ -4,6 +4,7 @@ import AllTutors from './AllTutors';
 
 import Service from './Service';
 import StudySession from './StudySession';
+import HomeFeatureSection from './HomeFeatureSection';
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
             <AllTutors />
             <StudySession />
             <Service />
+            <HomeFeatureSection />
         </div>
     );
 };

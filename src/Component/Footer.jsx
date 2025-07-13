@@ -1,18 +1,22 @@
 import React from "react";
-import footerBG from "../assets/coolBG.png"
+import footerBG from "../assets/coolBG.png";
 
 const Footer = () => {
   return (
     <div>
-          <footer className="footer sm:footer-horizontal text-white bg-cover p-10" style={{
-          backgroundImage: `url(${footerBG})`
-      }}>
+      <footer
+        className="footer sm:footer-horizontal text-white bg-cover p-10"
+        style={{
+          backgroundImage: `url(${footerBG})`,
+        }}
+      >
         <nav>
           <h6 className="footer-title">Services</h6>
-          <a className="link link-hover">Branding</a>
-          <a className="link link-hover">Design</a>
-          <a className="link link-hover">Marketing</a>
-          <a className="link link-hover">Advertisement</a>
+          <a className="link link-hover">Expert Tutors</a>
+          <a className="link link-hover">Group Collaboration</a>
+          <a className="link link-hover">Flexible Scheduling</a>
+          <a className="link link-hover">Study Materials</a>
+          <a className="link link-hover">Live Interactive Sessions</a>
         </nav>
         <nav>
           <h6 className="footer-title">Company</h6>
