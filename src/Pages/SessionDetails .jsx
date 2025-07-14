@@ -43,16 +43,14 @@ const SessionDetails = () => {
     if (
       session?.fee !== 0 &&
       user &&
-      role !== "admin" &&
-      role !== "tutor" &&
+      role === "student" &&
       session?.status === "approved"
     ) {
       navigate(`/session-payment/${id}`);
       return;
     } else if (
       session?.fee == 0 &&
-      role !== "admin" &&
-      role !== "tutor" &&
+      role === "student" &&
       session?.status === "approved"
     ) {
       const bookingInfo = {
@@ -103,7 +101,7 @@ const SessionDetails = () => {
 
   if (!session) return <p>Session not found</p>;
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-base-200 rounded shadow-md my-10">
+    <div className="max-w-4xl mx-auto p-6 bg-base-200 rounded shadow-md my-10 min-h-[70vh]">
       <h1 className="text-3xl font-bold mb-2">{session.title}</h1>
       <p className="text-gray-500 mb-4">
         👨‍🏫 Tutor: {session.tutorName} | ⭐ Average Rating:{" "}

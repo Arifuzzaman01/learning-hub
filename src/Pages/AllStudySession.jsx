@@ -32,7 +32,7 @@ const AllStudySessions = () => {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 min-h-[70vh]">
       <h1 className="text-3xl font-bold text-center mb-8">
         📚 All Study Sessions
       </h1>
