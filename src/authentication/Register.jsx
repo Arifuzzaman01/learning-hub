@@ -112,7 +112,7 @@ const Register = () => {
               />
               <div
                 onClick={() => setEyeChange(!eyeChange)}
-                className="absolute top-8 z-10 right-3"
+                className="absolute top-8 z-10 right-6 "
               >
                 {eyeChange ? <FaEyeSlash size={16} /> : <FaEye size={16} />}
               </div>
@@ -145,7 +145,7 @@ const Register = () => {
           <p className="text-center">
             Already have an account? Please{" "}
             <Link to="/login" className="text-blue-600 underline">
-              Login
+              Register
             </Link>{" "}
             here.
           </p>
