@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import useAuth from "../../hook/useAuth";
 import useAxiosSecure from "../../hook/useAxiosSecure";
-import nagativeSymble from "../../assets/nagative-symble.jpg";
+import nagativeSymble from "../../assets/nagative-symble.png";
 import LoadingSpinner from "../../common/LoadingSpinner";
 
 const StudentMaterials = () => {

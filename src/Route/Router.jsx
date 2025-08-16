@@ -28,6 +28,7 @@ import DashboardHome from "../Dashboard/DashboardHome";
 
 import AllTutorPage from "../Pages/AllTutorPage";
 import ErrorPage from "../Pages/ErrorPage";
+import Profile from "../Dashboard/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -79,6 +80,15 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: DashboardHome,
+      },
+      {
+        path: "profile",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <Profile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "allUsers",

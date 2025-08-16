@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import useAuth from "../../hook/useAuth";
-import nagativeSymble from "../../assets/nagative-symble.jpg"
+import nagativeSymble from "../../assets/nagative-symble.png"
 import LoadingSpinner from "../../common/LoadingSpinner";
 
 const ManageNotes = () => {

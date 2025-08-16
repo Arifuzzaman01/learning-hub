@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router";
-import nagativeSymble from "../../assets/nagative-symble.jpg";
+import nagativeSymble from "../../assets/nagative-symble.png";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import useAuth from "../../hook/useAuth";
 import LoadingSpinner from "../../common/LoadingSpinner";

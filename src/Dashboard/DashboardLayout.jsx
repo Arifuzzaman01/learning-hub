@@ -14,9 +14,13 @@ import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hook/useRole";
 import Logo from "../common/Logo";
 import LoadingSpinner from "../common/LoadingSpinner";
+import Profile from "./Profile";
+import useAuth from "../hook/useAuth";
 
 const DashboardLayout = () => {
   const { role, isLoading } = useRole();
+  const {user}= useAuth()
+  // console.log(user);
   if (isLoading) return <LoadingSpinner />;
   return (
     <div className="drawer lg:drawer-open bg-base-100 min-h-screen">
@@ -57,8 +61,9 @@ const DashboardLayout = () => {
       {/* Sidebar */}
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <aside className="w-80 min-h-full bg-base-200 p-4">
-          <Link to="/" className="w-32 font-bold mb-6 text-center">
+        <aside className="w-80 min-h-full bg-base-200 p-4 flex flex-col justify-between">
+          <div>
+            <Link to="/" className="w-32 font-bold mb-6 text-center">
             <div className="w-40">
               <Logo></Logo>
             </div>
@@ -225,6 +230,14 @@ const DashboardLayout = () => {
               </>
             )}
           </ul>
+          </div>
+          <div>
+            <Link className="flex gap-3 items-center ml-4 mb-5 hover:bg-white p-2 rounded-md hover:scale-105 duration-100 border border-gray-400" to="/dashboard/profile">
+            <img className="w-10 rounded-full border-2 border-blue-500" src={user?.photoURL} alt="" />
+            Profile
+            </Link>
+            
+          </div>
         </aside>
         <Toaster position="top-right" reverseOrder={false} />
       </div>

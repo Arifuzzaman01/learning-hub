@@ -35,7 +35,7 @@ const allSessions = allSession.slice(0,8)
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">
-        📚 All Study Sessions
+        📚 Latest Study Sessions
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -45,11 +45,11 @@ const allSessions = allSession.slice(0,8)
           return (
             <div
               key={session._id}
-              className="card shadow-md bg-base-100 border border-base-300 hover:scale-105 ease-in-out transition-all"
+              className="card shadow-md bg-base-100 border border-gray-300 hover:scale-105 ease-in-out transition-all"
             >
               <div className="card-body">
-                <h2 className="card-title">{session.title}</h2>
-                <p className="text-sm text-gray-500">
+                <h2 className="text-2xl font-bold">{session.title}</h2>
+                <p className="text-sm text-gray-400">
                   Duration: {session.duration} weeks
                 </p>
                 <p className="mt-2">{session.description.slice(0, 100)}...</p>
