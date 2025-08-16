@@ -4,7 +4,8 @@ import toast from "react-hot-toast";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import useAuth from "../../hook/useAuth";
-
+import nagativeSymble from "../../assets/nagative-symble.jpg"
+import LoadingSpinner from "../../common/LoadingSpinner";
 
 const ManageNotes = () => {
   const { user } = useAuth();
@@ -47,11 +48,17 @@ const ManageNotes = () => {
     const description = e.target.description.value;
     updateNote.mutate({ id: editNote._id, title, description });
   };
-
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+console.log(notes.length);
+  if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="max-w-4xl mx-auto p-4 space-y-4">
+    <div> {
+      notes.length == 0 ? <div className="flex flex-col h-[60vh] justify-center items-center ">
+          <p className="text-center text-red-600 text-4xl font-bold">
+            You have not added any notes!!
+          </p>
+          <img src={nagativeSymble} alt="" />
+        </div> : <div className="max-w-4xl mx-auto p-4 space-y-4">
       <h2 className="text-2xl font-bold mb-4">📚 Manage Your Notes</h2>
 
       {notes.map((note) => (
@@ -100,6 +107,7 @@ const ManageNotes = () => {
         </div>
       ))}
     </div>
+      }</div>
   );
 };
 

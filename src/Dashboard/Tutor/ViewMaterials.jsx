@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import useAuth from "../../hook/useAuth";
 import { imageUpload } from "../../common/ImageUpload";
+import LoadingSpinner from "../../common/LoadingSpinner";
 
 const ViewMaterials = () => {
   const { user } = useAuth();
@@ -78,7 +79,7 @@ const ViewMaterials = () => {
       <h1 className="text-2xl font-bold mb-4">📚 Your Uploaded Materials</h1>
 
       {isLoading ? (
-        <p className="text-center">Loading...</p>
+        <LoadingSpinner />
       ) : materials.length === 0 ? (
         <p>No materials uploaded yet.</p>
       ) : (

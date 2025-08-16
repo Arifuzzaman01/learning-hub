@@ -1,12 +1,13 @@
 import { Navigate } from "react-router";
 import useAuth from "../hook/useAuth";
 import useRole from "../hook/useRole";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const StudentRoute = ({ children }) => {
   const { user, loading } = useAuth(); // role = admin / tutor / student
   const { role, roleLoading } = useRole();
 
-  if (loading || roleLoading) return <p>Loading...</p>;
+  if (loading || roleLoading) return <LoadingSpinner />;
   console.log(role);
 
   if (user && role === "student") return children;

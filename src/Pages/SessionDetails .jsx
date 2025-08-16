@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import useAuth from "../hook/useAuth";
 import useRole from "./../hook/useRole";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const SessionDetails = () => {
   const { user } = useAuth();
@@ -97,7 +98,7 @@ const SessionDetails = () => {
     // }
   };
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
 
   if (!session) return <p>Session not found</p>;
   return (

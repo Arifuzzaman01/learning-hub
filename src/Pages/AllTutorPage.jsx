@@ -6,6 +6,7 @@ import { Link } from "react-router";
 
 import useAxiosSecure from "../hook/useAxiosSecure";
 import useAuth from "../hook/useAuth";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const AllTutorPage = () => {
   const axiosSecure = useAxiosSecure();
@@ -18,7 +19,7 @@ const AllTutorPage = () => {
     },
   });
   console.log(tutors);
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8 min-h-[60vh]">

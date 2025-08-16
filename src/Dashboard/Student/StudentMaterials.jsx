@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import useAuth from "../../hook/useAuth";
 import useAxiosSecure from "../../hook/useAxiosSecure";
+import nagativeSymble from "../../assets/nagative-symble.jpg";
+import LoadingSpinner from "../../common/LoadingSpinner";
 
 const StudentMaterials = () => {
   const { user } = useAuth();
@@ -28,31 +30,39 @@ const StudentMaterials = () => {
       return res.data;
     },
   });
-
-  if (isLoading)
-    return <p className="text-center py-10">Loading sessions...</p>;
+  // console.log(bookings);
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="max-w-5xl mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">📚 Your Study Materials</h2>
 
       {/* Step 1: Show booked sessions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        {bookings.map((book) => (
-          <button
-            key={book.sessionId}
-            onClick={() => setSelectedSessionId(book.sessionId)}
-            className={`btn ${
-              selectedSessionId === book.sessionId
-                ? "btn-primary"
-                : "btn-outline"
-            } w-full py-8`}
-          >
-                View Materials for Session ID: {book.sessionId.slice(-6)} <br />
-            Session Title : {book?.sessionTitle}
-          </button>
-        ))}
-      </div>
+      {bookings.length !== 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          {bookings.map((book) => (
+            <button
+              key={book.sessionId}
+              onClick={() => setSelectedSessionId(book.sessionId)}
+              className={`btn ${
+                selectedSessionId === book.sessionId
+                  ? "btn-primary"
+                  : "btn-outline"
+              } w-full py-8`}
+            >
+              View Materials for Session ID: {book.sessionId.slice(-6)} <br />
+              Session Title : {book?.sessionTitle}
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col h-[60vh] justify-center items-center ">
+          <p className="text-center text-red-600 text-4xl font-bold">
+            You have not receive any materials yet!!
+          </p>
+          <img src={nagativeSymble} alt="" />
+        </div>
+      )}
 
       {/* Step 2: Show materials by session */}
       {selectedSessionId && (

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { imageUpload } from "../../common/ImageUpload";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import useAuth from "../../hook/useAuth";
+import LoadingSpinner from "../../common/LoadingSpinner";
 
 const UploadMaterials = () => {
   const { user } = useAuth();
@@ -53,7 +54,7 @@ const UploadMaterials = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="max-w-3xl mx-auto p-4">

@@ -45,7 +45,7 @@ const allSessions = allSession.slice(0,8)
           return (
             <div
               key={session._id}
-              className="card shadow-md bg-base-100 border border-base-300"
+              className="card shadow-md bg-base-100 border border-base-300 hover:scale-105 ease-in-out transition-all"
             >
               <div className="card-body">
                 <h2 className="card-title">{session.title}</h2>

@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hook/useAxiosSecure";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router";
 import useAuth from "../../hook/useAuth";
+import LoadingSpinner from "../../common/LoadingSpinner";
 
 const AllTutors = () => {
   const axiosSecure = useAxiosSecure();
@@ -15,29 +16,29 @@ const AllTutors = () => {
       return data;
     },
   });
-  console.log(tutors);
-  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+  // console.log(tutors);
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h2 className="text-3xl font-bold text-center mb-6">🎓 All Tutors</h2>
-      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {tutors?.map((tutor) => (
           <div
             key={tutor._id}
-            className="card bg-base-100 shadow-md border p-5 hover:shadow-lg transition-all"
+            className="card bg-base-100 shadow-md border p-5 hover:shadow-lg transition-all hover:scale-105"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 ">
               <img
                 src={
                   tutor.imageURL || "https://i.ibb.co/NtnkXWz/default-user.png"
                 }
                 alt={tutor.name}
-                className="w-16 h-16 rounded-full object-cover border"
+                className="w-14 h-14 rounded-full object-cover border"
               />
               <div>
                 <h3 className="text-xl font-semibold">{tutor.name}</h3>
-                <p className="text-gray-500 text-sm">{tutor.email}</p>
+                <p className="text-gray-500 text-sm wrap-anywhere">{tutor.email}</p>
               </div>
             </div>
 

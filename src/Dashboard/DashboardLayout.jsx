@@ -12,10 +12,12 @@ import {
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hook/useRole";
+import Logo from "../common/Logo";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 const DashboardLayout = () => {
   const { role, isLoading } = useRole();
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div className="drawer lg:drawer-open bg-base-100 min-h-screen">
       {/* Sidebar toggle input for mobile */}
@@ -43,7 +45,7 @@ const DashboardLayout = () => {
               </svg>
             </label>
           </div>
-          <div className="flex-1 text-xl font-semibold">Dashboard</div>
+          <div className="flex-1 text-xl font-semibold uppercase">{role} Dashboard</div>
         </div>
 
         {/* Page content here */}
@@ -56,15 +58,13 @@ const DashboardLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <aside className="w-80 min-h-full bg-base-200 p-4">
-          <h2 className="text-2xl font-bold mb-6 text-center">
-            📚 Study Panel
-          </h2>
+          <Link to="/" className="w-32 font-bold mb-6 text-center">
+            <div className="w-40">
+              <Logo></Logo>
+            </div>
+          </Link>
           <ul className="menu space-y-2">
-            <li>
-              <Link to="/" className="text-xl font-bold">
-                <IoMdArrowRoundBack size={24} /> Go Back
-              </Link>
-            </li>
+            
             <li>
               <NavLink
                 to="/dashboard"
@@ -165,17 +165,7 @@ const DashboardLayout = () => {
                 </li>
               </>
             )}
-            {/* <li>
-              <NavLink
-                to="reviews"
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-primary" : undefined
-                }
-              >
-                ⭐ Reviews
-              </NavLink>
-            </li> */}
-            {/* student */}
+         
             {role === "student" && (
               <>
                 <li>

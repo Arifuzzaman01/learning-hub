@@ -44,9 +44,9 @@ const AllStudySessions = () => {
           return (
             <div
               key={session._id}
-              className="card shadow-md bg-base-100 border border-base-300"
+              className="card shadow-md bg-base-100 border border-base-300 hover:scale-105 transition-all ease-in-out"
             >
-              <div className="card-body">
+              <div className="card-body ">
                 <h2 className="card-title">{session.title}</h2>
                 <p className="text-sm text-gray-500">
                   Duration: {session.duration} weeks
