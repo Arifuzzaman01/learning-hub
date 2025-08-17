@@ -66,7 +66,7 @@ const UploadMaterials = () => {
         sessions.map((session) => (
           <div
             key={session._id}
-            className="collapse collapse-arrow bg-base-100 border border-base-300"
+            className="collapse collapse-arrow bg-base-100 border border-gray-300 my-1"
           >
             <input type="radio" name="my-accordion-2" defaultChecked />
             <div className="collapse-title font-semibold">

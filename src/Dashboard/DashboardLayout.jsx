@@ -250,12 +250,12 @@ const DashboardLayout = () => {
           </div>
           <div>
             <Link
-              className="flex gap-3 items-center ml-4 mb-5 hover:bg-white p-2 rounded-md hover:scale-105 duration-100 border border-gray-400"
+              className="flex gap-3 items-center ml-4 mb-5 hover:bg-white p-1 rounded-md hover:scale-105 duration-100 border border-gray-400"
               to="/dashboard/profile"
               onClick={closeDrawer}
             >
               <img
-                className="w-10 rounded-full border-2 border-blue-500"
+                className="w-10 h-10 rounded-full border-2 border-blue-500"
                 src={user?.photoURL}
                 alt=""
               />

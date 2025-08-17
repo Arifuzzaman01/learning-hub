@@ -84,7 +84,7 @@ const ViewMaterials = () => {
         <p>No materials uploaded yet.</p>
       ) : (
         materials.map((material) => (
-          <div key={material._id} className="card bg-base-100 shadow p-4">
+          <div key={material._id} className="card bg-base-100 shadow p-4 border border-gray-300">
             {editId === material._id ? (
               <form
                 onSubmit={handleUpdate}

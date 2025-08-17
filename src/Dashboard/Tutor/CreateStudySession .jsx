@@ -68,7 +68,7 @@ const CreateStudySession = () => {
             type="text"
             defaultValue={user?.displayName}
             readOnly
-            className="input input-bordered w-full bg-gray-100"
+            className="input input-bordered w-full bg-base-100"
           />
         </div>
 
@@ -80,7 +80,7 @@ const CreateStudySession = () => {
             type="email"
             defaultValue={user?.email}
             readOnly
-            className="input input-bordered w-full bg-gray-100"
+            className="input input-bordered w-full bg-base-100"
           />
         </div>
 

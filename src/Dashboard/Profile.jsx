@@ -27,7 +27,7 @@ const Profile = () => {
       {/* Profile Image */}
       <div className="flex justify-center -mb-20">
         <img
-          className="rounded-full w-28 h-28 md:w-40 md:h-40 border-4 border-white shadow-md"
+          className="rounded-full w-28 h-28 md:w-40 md:h-40 border-4 bg-gray-100 border-white shadow-md"
           src={userData.imageURL}
           alt={userData.name}
         />

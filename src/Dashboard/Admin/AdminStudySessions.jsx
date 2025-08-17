@@ -103,7 +103,7 @@ const AdminStudySessions = () => {
         {sessions.map((session) => (
           <div
             key={session._id}
-            className="card bg-base-100 shadow-md p-4 space-y-2"
+            className="card bg-base-100 shadow-md p-4 space-y-2 border border-gray-300"
           >
             <h3 className="text-xl font-semibold">{session.title}</h3>
             <p>

@@ -30,8 +30,7 @@ const role = user?.role
         <h1 className="text-3xl font-bold text-primary">
           Welcome, {user?.displayName || "User"}!
         </h1>
-        <p className="text-lg text-gray-600">
-          You are logged in as a{" "}
+        <p className="text-lg text-gray-500">
           <span className="capitalize font-semibold text-secondary">
             {role}
           </span>
