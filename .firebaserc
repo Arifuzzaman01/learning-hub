@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "learn-hub-ec1a2"
-  }
+    "default": "learn-hub-ec1a2",
+    "y": "learn-hub-ec1a2"
+  },
+  "targets": {},
+  "etags": {}
 }

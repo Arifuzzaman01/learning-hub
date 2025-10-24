@@ -23,7 +23,7 @@ const CreateNote = () => {
         reset();
       }
     } catch (err) {
-      toast.error("Failed to create note");
+      toast.error("Failed to create note. Please try again.");
       console.error(err);
     }
   };

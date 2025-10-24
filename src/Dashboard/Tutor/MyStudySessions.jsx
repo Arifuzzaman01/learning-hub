@@ -1,8 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import toast from "react-hot-toast";
-import useAxiosSecure from "./../../hook/useAxiosSecure";
-import useAuth from "./../../hook/useAuth";
+import useAxiosSecure from "../../hook/useAxiosSecure";
+import useAuth from "../../hook/useAuth";
 import LoadingSpinner from "../../common/LoadingSpinner";
 
 const MyStudySessions = () => {

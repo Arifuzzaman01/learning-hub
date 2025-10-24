@@ -51,6 +51,7 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error);
+        toast.error("Registration failed. Please try again.");
       });
   };
 
@@ -134,7 +135,7 @@ const Register = () => {
                 type="submit"
                 className="btn btn-neutral  flex-1 rounded-br-full"
               >
-                Login
+                Register
               </button>
               <div className="flex-1 rounded-tl-full w-full">
                 <SocialLogin reg={"reg"} />
@@ -145,7 +146,7 @@ const Register = () => {
           <p className="text-center">
             Already have an account? Please{" "}
             <Link to="/login" className="text-blue-600 underline">
-              Register
+              Login
             </Link>{" "}
             here.
           </p>

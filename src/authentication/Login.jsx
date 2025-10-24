@@ -28,6 +28,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Login failed. Please check your credentials.");
       });
   };
   return (
@@ -72,7 +73,7 @@ const Login = () => {
           <p className="text-center text-sm -my-2">Or</p>
           <SocialLogin></SocialLogin>
           <p>
-            You have'nt an account? Please Create{" "}
+            Don't have an account? Please Create{" "}
             <Link className="text-blue-600 underline" to="/register">
               an account
             </Link>

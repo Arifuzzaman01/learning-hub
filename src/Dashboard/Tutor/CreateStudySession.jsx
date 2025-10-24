@@ -15,13 +15,17 @@ const CreateStudySession = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log("Form Data:", data);
-    // done: send to backend
-    const result = await axiosSecure.post("/session", data);
-    console.log(result?.data);
-    if (result?.data?.insertedId) {
-      toast.success("Created study session");
-      reset();
+    try {
+      const result = await axiosSecure.post("/session", data);
+      if (result?.data?.insertedId) {
+        toast.success("Study session created successfully!");
+        reset();
+      } else {
+        toast.error("Failed to create study session. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error creating study session:", error);
+      toast.error("Failed to create study session. Please try again.");
     }
   };
 
@@ -139,7 +143,7 @@ const CreateStudySession = () => {
             {...register("fee")}
             className="w-full select select-bordered"
           >
-            <option defaultValue='free' value="free">Free</option>
+            <option value="free">Free</option>
             <option value="paid">Paid</option>
           </select>
         </div>
