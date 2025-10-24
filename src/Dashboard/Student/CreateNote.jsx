@@ -19,7 +19,7 @@ const CreateNote = () => {
     try {
       const res = await axiosSecure.post("/notes", data);
       if (res.data.insertedId) {
-        toast.success("✅ Note created successfully!");
+        toast.success("Note created successfully!");
         reset();
       }
     } catch (err) {
@@ -29,45 +29,63 @@ const CreateNote = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">📝 Create a Note</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
-        <div>
-          <label className="label">Email</label>
+    <div className="max-w-2xl mx-auto p-4" role="main" aria-labelledby="create-note-heading">
+      <h1 id="create-note-heading" className="text-3xl font-bold text-center mb-6">Create a New Note</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-base-100 p-6 rounded-lg shadow-md">
+        <div className="form-control">
+          <label htmlFor="email" className="label">
+            <span className="label-text">Email Address</span>
+          </label>
           <input
             type="email"
+            id="email"
             readOnly
             defaultValue={user?.email}
             {...register("email")}
-            className="input input-bordered w-full"
+            className="input input-bordered w-full bg-base-200"
+            aria-describedby="email-help"
           />
+          <div id="email-help" className="label-text-alt text-gray-500 mt-1">Your email address (read-only)</div>
         </div>
 
-        <div>
-          <label className="label">Title</label>
+        <div className="form-control">
+          <label htmlFor="title" className="label">
+            <span className="label-text">Note Title</span>
+          </label>
           <input
             type="text"
-            placeholder="Note title"
-            {...register("title", { required: true })}
+            id="title"
+            placeholder="Enter note title"
+            {...register("title", { required: "Title is required" })}
             className="input input-bordered w-full"
+            aria-describedby="title-help"
+            aria-invalid={errors.title ? "true" : "false"}
           />
-          {errors.title && <p className="text-red-500 text-sm">Title is required</p>}
+          <div id="title-help" className="label-text-alt text-gray-500 mt-1">Enter a title for your note</div>
+          {errors.title && <p className="text-error text-sm mt-1" role="alert">{errors.title.message}</p>}
         </div>
 
-        <div>
-          <label className="label">Description</label>
+        <div className="form-control">
+          <label htmlFor="description" className="label">
+            <span className="label-text">Note Content</span>
+          </label>
           <textarea
-            placeholder="Write your note..."
-            {...register("description", { required: true })}
-            className="textarea textarea-bordered w-full"
+            id="description"
+            placeholder="Write your note content here..."
+            {...register("description", { required: "Description is required" })}
+            className="textarea textarea-bordered w-full h-32"
+            aria-describedby="description-help"
+            aria-invalid={errors.description ? "true" : "false"}
           ></textarea>
-          {errors.description && <p className="text-red-500 text-sm">Description is required</p>}
+          <div id="description-help" className="label-text-alt text-gray-500 mt-1">Enter the content of your note</div>
+          {errors.description && <p className="text-error text-sm mt-1" role="alert">{errors.description.message}</p>}
         </div>
 
-        <button type="submit" className="btn btn-primary w-full">
-          ➕ Save Note
-        </button>
+        <div className="form-control mt-6">
+          <button type="submit" className="btn btn-primary w-full">
+            Save Note
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -25,23 +25,30 @@ import Home from "../Pages/homePage/Home";
 import AdminAllMaterials from "../Dashboard/Admin/AdminAllMaterials";
 import Payment from "../Pages/Payment/Payment";
 import DashboardHome from "../Dashboard/DashboardHome";
-
 import AllTutorPage from "../Pages/AllTutorPage";
 import ErrorPage from "../Pages/ErrorPage";
 import Profile from "../Dashboard/Profile";
 
+/**
+ * Application router configuration
+ * 
+ * Defines all routes for the application including public routes,
+ * authenticated routes, and role-specific dashboard routes.
+ * 
+ * @type {Object}
+ */
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: MainLayout,
+    element: <MainLayout />,
     children: [
       {
         index: true,
-        Component: Home,
+        element: <Home />,
       },
       {
         path: "/all-study-session",
-        Component: AllStudySession,
+        element: <AllStudySession />,
       },
       {
         path: "/session/:id",
@@ -53,19 +60,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/login",
-        Component: Login,
+        element: <Login />,
       },
       {
         path: "/session-payment/:id",
-        Component: Payment,
+        element: <Payment />,
       },
       {
         path: "/register",
-        Component: Register,
+        element: <Register />,
       },
       {
         path: "/all-tutor-page",
-        Component: AllTutorPage,
+        element: <AllTutorPage />,
       },
     ],
   },
@@ -79,17 +86,17 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: DashboardHome,
+        element: <DashboardHome />,
       },
       {
         path: "profile",
         element: (
           <PrivateRoute>
-            {" "}
             <Profile />
           </PrivateRoute>
         ),
       },
+      // Admin routes
       {
         path: "allUsers",
         element: (
@@ -110,12 +117,11 @@ export const router = createBrowserRouter([
         path: "admin-all-materials",
         element: (
           <AdminRoute>
-            {" "}
             <AdminAllMaterials />
           </AdminRoute>
         ),
       },
-      // tutor
+      // Tutor routes
       {
         path: "createStudy",
         element: (
@@ -128,7 +134,6 @@ export const router = createBrowserRouter([
         path: "upload-materials",
         element: (
           <TutorRoute>
-            {" "}
             <UploadMaterials />
           </TutorRoute>
         ),
@@ -142,14 +147,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "my-study-sessions", //my-study-sessions
+        path: "my-study-sessions",
         element: (
           <TutorRoute>
             <MyStudySessions />
           </TutorRoute>
         ),
       },
-      // student
+      // Student routes
       {
         path: "booked-sessions",
         element: (
@@ -182,7 +187,6 @@ export const router = createBrowserRouter([
           </StudentRoute>
         ),
       },
-
       {
         path: "view-student-materials",
         element: (
@@ -195,6 +199,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    Component: ErrorPage,
+    element: <ErrorPage />,
   },
 ]);

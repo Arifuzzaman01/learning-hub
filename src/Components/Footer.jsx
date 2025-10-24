@@ -3,7 +3,7 @@ import footerBG from "../assets/coolBG.png";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import logo from "../assets/study-panel2.png"
 
-const Footer = () => {
+const Footer = React.memo(() => {
   return (
     <div>
       <footer
@@ -48,6 +48,6 @@ const Footer = () => {
       </footer>
     </div>
   );
-};
+});
 
 export default Footer;

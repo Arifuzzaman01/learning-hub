@@ -1,47 +1,56 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import useAuth from "../hook/useAuth";
 import toast from "react-hot-toast";
 import { saveUserInDB } from "../utils/utils";
 import { useLocation, useNavigate } from "react-router";
 
 const SocialLogin = ({ reg }) => {
-  const { googleLogin, setLoading } = useAuth();
+  const { googleLogin } = useAuth();
   const location = useLocation()
-   const from = location?.state?.from || "/";
+  const from = location?.state?.from || "/";
   const navigate = useNavigate()
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then(async (result) => {
-        setLoading(false);
-        // console.log(result);
-        const userInfo = {
-          name: result?.user?.displayName,
-          email: result?.user?.email,
-          imageURL: result?.user?.photoURL,
-          role: "student",
-          createdAt: new Date().toISOString(),
-          lastCreatedAt: new Date().toISOString(),
-        };
-        await saveUserInDB(userInfo);
-        toast.success("Google logIn Successful");
-        // 
-        navigate(from, {replace: true})
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const [loading, setLoading] = useState(false);
+  
+  const handleGoogleLogin = useCallback(async () => {
+    setLoading(true);
+    try {
+      const result = await googleLogin();
+      
+      // Prepare user info
+      const userInfo = {
+        name: result?.user?.displayName,
+        email: result?.user?.email,
+        imageURL: result?.user?.photoURL,
+        role: "student",
+        createdAt: new Date().toISOString(),
+        lastLoggedAt: new Date().toISOString(),
+      };
+      
+      // Save user to database
+      await saveUserInDB(userInfo);
+      
+      toast.success("Google login successful");
+      navigate(from, {replace: true});
+    } catch (err) {
+      console.log("Google login error:", err);
+      toast.error("Google login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }, [googleLogin, navigate, from]);
+
   return (
     <div>
       {/* Google */}
       <button
         onClick={handleGoogleLogin}
-        className={`btn btn-primary   w-full ${reg && "rounded-tl-full"}`}
+        className={`btn btn-primary w-full ${reg && "rounded-tl-full"} ${loading ? 'loading' : ''}`}
+        disabled={loading}
       >
-        Google LogIn
+        {loading ? 'Logging in with Google...' : 'Google Login'}
       </button>
     </div>
   );
 };
 
-export default SocialLogin;
+export default React.memo(SocialLogin);
