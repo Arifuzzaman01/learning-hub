@@ -1,12 +1,18 @@
-# React + Vite
+VITE_IMG_KEY=8933a8751c54fc945872ad936fc0c7ca
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# firebase
+  VITE_apiKey=AIzaSyBm8_0qo4mSdMnWKwiYIIp7j_Ld7PKko44
+  VITE_authDomain=learn-hub-ec1a2.firebaseapp.com
+  VITE_projectId=learn-hub-ec1a2
+  VITE_storageBucket=learn-hub-ec1a2.firebasestorage.app
+  VITE_messagingSenderId=430067352170
+  VITE_appId=1:430067352170:web:7634732c7b1e50959fc01
 
-Currently, two official plugins are available:
+  # 
+  VITE_STRIPE_PUBLIC_KEY=pk_test_51RjhiwR3JT7OlF40e3dl4yMEGlbnM3E5oLTsrGg6JD8RI3tKl7LKKGXQsrtYDLraSK1dWv8q3q79bPum9GVrAqsv00ARn47yT6
+  VITE_base_url=http://localhost:3000
+  # VITE_base_url=https://learn-hub-five-tau.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+  ## add the key on the .env file 
+  ## command 'npm install' on the project terminal 
+  ## than command 'npm run dev' for run the project
