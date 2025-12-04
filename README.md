@@ -1,6 +1,6 @@
 VITE_IMG_KEY=8933a8751c54fc945872ad936fc0c7ca
 
-# firebase
+
   VITE_apiKey=AIzaSyBm8_0qo4mSdMnWKwiYIIp7j_Ld7PKko44
   VITE_authDomain=learn-hub-ec1a2.firebaseapp.com
   VITE_projectId=learn-hub-ec1a2
